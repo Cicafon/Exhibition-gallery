@@ -1,0 +1,10 @@
+.bar {
+    background-color: var(--blue);
+    height: 0.4rem;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    position: fixed;
+    z-index: 10;
+    border-radius: 5px;
+}

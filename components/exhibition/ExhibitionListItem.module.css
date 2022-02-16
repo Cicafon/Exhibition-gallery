@@ -1,0 +1,30 @@
+.item {
+    margin: 1rem;
+    padding: 1rem;
+    cursor: pointer;
+    background-color: white;
+    width: 20rem;
+    text-align: center; 
+}
+
+.item:hover {
+   filter: brightness(90%)
+}
+
+.item img {
+    max-width: -webkit-fill-available;
+    max-height: 18rem;
+}
+
+.item p{
+    margin: 0.2rem 0;  
+}
+
+.title {
+    font-weight: bold;
+}
+
+.dates {
+    font-style: italic;
+    font-size: 0.9em;
+}

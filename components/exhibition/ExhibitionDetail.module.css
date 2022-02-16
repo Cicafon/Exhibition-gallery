@@ -1,0 +1,48 @@
+.back:hover {
+  font-weight: bold;
+  color: var(--blue);
+  cursor: pointer;
+}
+
+.title-section {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  margin: 1rem 0;
+}
+
+.title-section h1,
+.title-section p {
+  margin: 0 1rem 0 0;
+}
+
+.picture-description-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.picture-description-section img {
+  max-width: 30rem;
+  height: -webkit-fill-available;
+  margin: 1rem 0 1rem 0;
+}
+
+.picture-description-section p {
+  margin: 0;
+}
+
+.dates {
+  font-style: italic;
+}
+
+@media (min-width: 600px) {
+  .picture-description-section {
+    flex-direction: row;
+  }
+  .title-section {
+    flex-direction: row;
+  }
+  .picture-description-section img {
+    margin: 0 2rem 0 0;
+  }
+}
