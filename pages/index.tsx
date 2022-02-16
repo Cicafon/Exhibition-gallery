@@ -12,10 +12,13 @@ const Home: NextPage<{ exhibitions: Exhibition[]; status: string }> = (
 ) => {
   const [listItems, setListItems] = useState<Exhibition[] >(props.exhibitions);
   const [isFetching, setIsFetching] = useState(false);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(2);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
+    return () => {
+      setListItems(props.exhibitions); 
+    };
   }, []);
 
   const handleScroll = () => {
