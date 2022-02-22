@@ -5,43 +5,43 @@ import { Exhibition } from "../components/models";
 import { getAllExhibitions } from "../lib/lib";
 import styles from "../styles/Home.module.css";
 import { useState, useEffect } from "react";
-import LoadingSpinner from "../components/UI/LoadingSpinner";
+import LoadingSpinner from "../components/spinner/LoadingSpinner";
+import { throttle } from "lodash";
 
 const Home: NextPage<{ exhibitions: Exhibition[]; status: string }> = (
   props
 ) => {
-  const [listItems, setListItems] = useState<Exhibition[] >(props.exhibitions);
+  const [listItems, setListItems] = useState<Exhibition[]>(props.exhibitions);
   const [isFetching, setIsFetching] = useState(false);
   const [page, setPage] = useState(2);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", throttle(handleScroll, 1000));
     return () => {
-      setListItems(props.exhibitions); 
+      setListItems(props.exhibitions);
     };
   }, []);
 
   const handleScroll = () => {
+    console.log("handleScroll");
     if (
-      window.innerHeight + Math.ceil(window.pageYOffset) >=
-        document.body.offsetHeight ||
-      isFetching
+      window.innerHeight + Math.ceil(window.scrollY) + window.scrollY * 0.2 >=
+      document.body.scrollHeight
     ) {
-      return;
+      setIsFetching(true);
     }
-    setIsFetching(true);
   };
 
   const fetchData = async () => {
-    setTimeout(async () => {
-      const data: { data: Exhibition[] | []; status: string } =
-        await getAllExhibitions(page);
-      setPage(page + 1);
+    // setTimeout(async () => {
+    const data: { data: Exhibition[] | []; status: string } =
+      await getAllExhibitions(page);
+    setPage(page + 1);
 
-      setListItems((prevState) => [...prevState, ...data.data]);
+    setListItems((prevState) => [...prevState, ...data.data]);
 
-      setIsFetching(false);
-    }, 1000);
+    setIsFetching(false);
+    // }, 1000);
   };
 
   useEffect(() => {
@@ -50,6 +50,7 @@ const Home: NextPage<{ exhibitions: Exhibition[]; status: string }> = (
   }, [isFetching]);
 
   const fetchMoreListItems = () => {
+    console.log("fetchdata");
     fetchData();
   };
 
@@ -60,7 +61,7 @@ const Home: NextPage<{ exhibitions: Exhibition[]; status: string }> = (
         <meta name="description" content="This is an exhibition gallery" />
       </Head>
       <h3 className={styles.title}>Our exhibitions</h3>
-      {listItems  && <ExhibitionList exhibitions={listItems} />}
+      {listItems && <ExhibitionList exhibitions={listItems} />}
       {props.status === "error" && (
         <p className="error">Error during fetching the data</p>
       )}

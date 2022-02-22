@@ -1,10 +1,12 @@
 const placeHolderImg =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ3fegNa5a5si6R-U2zMlldvLxAAbMSWtBnxfRzTp2SsPE1_wJj06UJqf_As34AOG6SI0&usqp=CAU";
 
+const url = process.env.NEXT_PUBLIC_EXHIBITION_URL
+
 export const getAllExhibitions = async (page: number) => {
   try {
     const response = await fetch(
-      `https://api.artic.edu/api/v1/exhibitions?page=${page}`
+      `${url}?page=${page}`
     );
     const data = await response.json();
     if (data.error) {
@@ -33,7 +35,7 @@ export const getAllExhibitions = async (page: number) => {
 export const getSingleExhibition = async (id: string) => {
   try {
     const response = await fetch(
-      `https://api.artic.edu/api/v1/exhibitions/${id}`
+      `${url}/${id}`
     );
     if (!response.ok) {
       throw new Error("cannot fetch");

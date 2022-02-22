@@ -2,7 +2,7 @@ import "../styles/globals.css";
 import "../styles/colors.css";
 import type { AppProps } from "next/app";
 import Layout from "../components/layout/Layout";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Progress from "../components/progress/Progress";
 
@@ -27,12 +27,12 @@ function MyApp({ Component, pageProps }: AppProps) {
     };
   }, [router]);
   return (
-    <>
+    <React.Fragment>
       <Progress isAnimating={isAnimating} />
       <Layout>
         <Component {...pageProps} />
       </Layout>
-    </>
+    </React.Fragment>
   );
 }
 
