@@ -23,9 +23,9 @@ const Home: NextPage<{ exhibitions: Exhibition[]; status: string }> = (
   }, []);
 
   const handleScroll = () => {
-    console.log("handleScroll");
+    //console.log("handleScroll");
     if (
-      window.innerHeight + Math.ceil(window.scrollY) + window.scrollY * 0.2 >=
+      window.innerHeight + Math.ceil(window.scrollY) + window.scrollY * 0.3 >=
       document.body.scrollHeight
     ) {
       setIsFetching(true);
@@ -33,15 +33,11 @@ const Home: NextPage<{ exhibitions: Exhibition[]; status: string }> = (
   };
 
   const fetchData = async () => {
-    // setTimeout(async () => {
     const data: { data: Exhibition[] | []; status: string } =
       await getAllExhibitions(page);
     setPage(page + 1);
-
     setListItems((prevState) => [...prevState, ...data.data]);
-
     setIsFetching(false);
-    // }, 1000);
   };
 
   useEffect(() => {
@@ -50,7 +46,6 @@ const Home: NextPage<{ exhibitions: Exhibition[]; status: string }> = (
   }, [isFetching]);
 
   const fetchMoreListItems = () => {
-    console.log("fetchdata");
     fetchData();
   };
 

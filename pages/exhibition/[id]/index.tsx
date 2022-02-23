@@ -35,6 +35,7 @@ export async function getStaticPaths() {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const id: any = context.params!.id;
+  console.log(typeof id)
   const loadedExhibitionData = await getSingleExhibition(id);
 
   return {
