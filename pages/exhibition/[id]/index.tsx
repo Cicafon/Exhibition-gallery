@@ -3,7 +3,7 @@ import { Exhibition } from "../../../components/models";
 import type { NextPage, GetStaticProps } from "next";
 import React from "react";
 import Head from "next/head";
-import { getSingleExhibition } from "../../../lib/lib";
+import { getSingleExhibition } from "../../../lib/api";
 
 const ExhibitionDetails: NextPage<{ exhibition: Exhibition | null, status: string }> = ({
   exhibition, status
@@ -35,7 +35,6 @@ export async function getStaticPaths() {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const id: any = context.params!.id;
-  console.log(typeof id)
   const loadedExhibitionData = await getSingleExhibition(id);
 
   return {

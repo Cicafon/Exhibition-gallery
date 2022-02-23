@@ -2,7 +2,7 @@ import type { NextPage, GetServerSideProps } from "next";
 import Head from "next/head";
 import ExhibitionList from "../components/exhibition/ExhibitionList";
 import { Exhibition } from "../components/models";
-import { getAllExhibitions } from "../lib/lib";
+import { getAllExhibitions } from "../lib/api";
 import styles from "../styles/Home.module.css";
 import { useState, useEffect } from "react";
 import LoadingSpinner from "../components/spinner/LoadingSpinner";

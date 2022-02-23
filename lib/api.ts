@@ -1,24 +1,9 @@
+import { sendRequest } from "./sendRequest";
+
 const placeHolderImg =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ3fegNa5a5si6R-U2zMlldvLxAAbMSWtBnxfRzTp2SsPE1_wJj06UJqf_As34AOG6SI0&usqp=CAU";
 
 const url = process.env.NEXT_PUBLIC_EXHIBITION_URL;
-
-const sendRequest = async (requestUrl: string) => {
-  try {
-    const response = await fetch(requestUrl);
-    const data = await response.json();
-    if (data.error || !data) {
-      throw new Error("cannot fetch");
-    }
-    return { data: data.data, status: "success" };
-  } catch (err) {
-    return {
-      data: null,
-      status: "error",
-      error: err,
-    };
-  }
-};
 
 export const getAllExhibitions = async (page: number) => {
   const result = await sendRequest(`${url}?page=${page}`);
